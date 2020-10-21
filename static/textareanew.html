@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="robots" content="noindex, nofollow" />
+    {% include 'include.html' %}
+    <title>Your secure text</title>
+</head>
+
+<body style="background-color: rgb(231,231,231);">
+    <nav class="navbar navbar-dark navbar-expand-md fixed-top bg-dark text-center">
+        <div class="container-fluid"><a class="navbar-brand secure-text-logo" href="#"><i class="fa fa-lock"></i>&nbsp; Secure Text</a><div class="d-none d-md-block d-lg-none d-none d-lg-block d-xl-none d-none d-xl-block">
+<button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+</div>
+            <div class="collapse navbar-collapse text-center flex-row-reverse flex-shrink-0 flex-wrap textarea-nav" id="navcol-1"><a href="{% url 'report_page' %}"><i data-toggle="tooltip" class="fa fa-bug fa-lg" style="color: rgb(225,5,5);" title="Report issue"></i></a>
+                <ul class="nav navbar-nav float-right flex-row flex-grow-0 justify-content-around">
+                    <li class="nav-item" role="presentation"><button class="btn btn-success option-btns save-btn" id="save-btn" type="button">Save</button></li>
+                    <li class="nav-item" role="presentation"><button class="btn btn-success option-btns reload-btn" id="reload-btn" type="button" style="background-color: rgb(242,105,46);">Reload</button></li>
+                    <li class="nav-item" role="presentation"><button class="btn btn-success option-btns change-password-btn" id="change-password-btn" type="button" style="background-color: rgb(34,141,201);">Change password</button></li>
+                    <li class="nav-item" role="presentation"><button class="btn btn-success option-btns delete-btn" id="delete-btn" type="button" style="background-color: rgb(170,43,43);">Delete</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav><div class="d-block d-sm-none d-none d-sm-block d-md-none">
+<div class="middle">
+    <a class="fbtn" href="#" id="save" data-toggle = "tooltip" title = "Save">
+        <i class="fas fa-save save-btn"></i>
+    </a>
+    <a class="fbtn" href="#" id="reload" data-toggle = "tooltip" title = "Reload">
+        <i class="fas fa-redo-alt reload-btn"></i>
+    </a>
+    <a class="fbtn" href="#" id="passchange" data-toggle = "tooltip" title = "Change Password">
+        <i class="fas fa-key change-password-btn"></i>
+    </a>
+    <a class="fbtn" href="#" id="delete" data-toggle = "tooltip" title = "Delete">
+        <i class="fas fa-trash delete-btn"></i>
+    </a>
+    <a class="fbtn" href="{% url 'report_page' %}" id="report" data-toggle = "tooltip" title = "Report">
+        <i class="fas fa-bug"></i>
+    </a>
+</div>
+</div>
+</div>
+    <div class="row options-pane">
+        <div class="col-4"><button style="background-color:#000" class="btn btn-info newtab-btn" type="button" onclick="newTab2(true)">+ New</button></div>
+        <div class="col text-right"><i onclick="closeTab()" class="fa fa-close" id="closetab-btn" title="close tab." style="color: rgb(249,6,6);font-size: 23px;"></i></div>
+    </div>
+    <div class="row text-area">
+        <div class="col-4 tabs-col"><div class="tab">
+    <button id="tab-btn-1" class="tablinks active" onclick="switchTab(this.id)">Tab1</button>
+</div>
+
+</div>
+        <div class="col textarea-col">
+            <div class="tab-content"><textarea class="border rounded actual-textarea tab-pane active" id="tab-1" placeholder="Write your text here..." spellcheck="false" onchange="updateText(this.id)"></textarea></div>
+        </div>
+    </div><div role="dialog" id="change-password" tabindex="-1" class="modal fade" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Change password</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="modal-body">
+                <p>Enter password : <input type="password" id="new-password" class="border rounded" /></p>
+                <p>Re-enter password : <input type="password" id="new-password-confirm" class="border rounded" /></p>
+            </div>
+            <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button" id ="change-password-confirm-btn">Save</button></div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

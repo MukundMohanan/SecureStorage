@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="robots" content="index, nofollow" />
+
+    {% include 'include.html' %}
+    <title>SecureStorage - Save Everything on the go!</title>
+    <meta name="description" content="A secure way to store your texts or notes on the go! As simple as creating your link, storing your text, and encrypting it with a password. Neither your password, nor your plain text will leave your browser, never! Anonymity and security at the same place.">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md fixed-top bg-dark">
+        <div class="container-fluid"><a class="navbar-brand secure-text-logo" href="#"><i class="fa fa-lock"></i>&nbsp; SecureStorage</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav float-right flex-grow-1 justify-content-end">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'home_page' %}">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'how-it-works' %}">How it works</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'about_page' %}">About</a></li>
+                    <li class="nav-item" role="presentation" data-bs-hover-animate="rubberBand"></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <section class="general-area home">
+        <h1><strong>Save everything securely on the go!</strong></h1>
+        <h3>Create a site and store Anything, then protect them with a password.</h3>
+        <div class="row securetxt-page-creator">
+            <div class="col">
+                <h1 class="secure-text-site">securestorage.ml/<input id="create-site-box" type="text" class="bg-white border rounded border-dark shadow-sm" placeholder="write.." 
+       onblur="onBlurEvent(this)"/>
+</h1><button class="btn btn-primary go-btn" type="button" onclick="goToSite()">go!</button></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>We don't save everything on our server. All we save is the encrypted.<br>Your password never leaves your browser. We also don't know who these texts belong to,
+                    you are anonymous using this site.<br>You may want to know more about <a href="/how-it-works">how this site works.</a></p>
+            </div>
+        </div>
+    </section>
+    <script>
+        function goToSite()
+        {
+            var site_url = document.getElementById("create-site-box").value;
+            var regex = "^[a-zA-Z 0-9\_\-]*$"
+            if(site_url.match(regex)!=null)
+            {
+                window.location.href = "/"+site_url;
+            }
+            else
+            {
+                alert("Special characters other than - and _ are not allowed");
+            }
+            
+        }
+    </script>
+</body>
+
+</html>
