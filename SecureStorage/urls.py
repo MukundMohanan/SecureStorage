@@ -23,6 +23,9 @@ urlpatterns = [
     path('about/',sitehandler_views.open_aboutpage,name="about_page"),
     path('how-it-works/',sitehandler_views.open_howitworkspage,name="how-it-works"),
     path('load_layout/',sitehandler_views.load_layout),
+    path('load_site/',sitehandler_views.load_site),
     path('report/',sitehandler_views.open_reportpage,name="report_page"),
+    path('save_site/',sitehandler_views.save_site),
+    path('delete_site/',sitehandler_views.delete_site),
     path('<slug:site_url>/', sitehandler_views.open_site),
 ]

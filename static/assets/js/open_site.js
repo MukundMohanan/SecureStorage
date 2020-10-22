@@ -367,7 +367,7 @@ async function downloadSite(callback)
             {
                 type:"POST",
                 url: "/load_site/",
-                data:{  
+                data:{
                     site_url : site_url,
        
                 },
