@@ -54,7 +54,7 @@ var newHash = "";
 site_url = site_url.substr(1,site_url.length-2)
 var seperator = "acdcc9e377db73f8b3ae141353015db7c8141a659c465cb3f42ed93e3727e8d5ff4743c887a6816821789df7914749a1ff722455b26057b6058011f3ba8886b5";
 var unsaved = false;
-var salt = "~~securetext.in~~"; //stay safe from rainbow tables
+var salt = "8141a659c465cb3f42ed93e3727e8d5ff4743c887a6816821789df"; //stay safe from rainbow tables
 var initialText = "";
 // var initialPassword = password;
 
