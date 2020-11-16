@@ -1,4 +1,4 @@
-# Start from 48:00 part 2
+# Port running on 8000
 
 
 
@@ -28,3 +28,11 @@ python manage.py migrate
 ```
 python manage.py makemigrations <sitehandler-name>
 ```
+# Access database
+```
+python manage.py shell -- to open it in a shell
+from sitehandler.models import Sites
+s = Sites.objects.filter(site_url="hello")
+len(s)
+s[0].cipher
+s[0].hashcontent
