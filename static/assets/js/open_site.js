@@ -1,52 +1,3 @@
-/**
-DOCUMENTATION
-
-
-GLOBAL VARIABLES : 
-password - Holds the password of the site at any given point of time.
-site_url - Holds the name of the site, it is extracted from the URL as soon as a URL is loaded in the browser.
-initHash - This is the SHA512 hash of the initial decrypted content. This is calculated as soon as the site is succesfully decrypted with a password. It is used by the server to authorize changes made to the site(save, reload, change password, delete)
-newHash - The SHA512 hash of the modified text in the site. Used to make further updates to site.
-seperator - The SHA512 of the string "~~~~~~~~tabseperate~~~~~~~~". It is used to seperate text by tabs.
-
-
-EVENT LISTENERS : 
-"#create-btn".click() - Triggers when Create site button is clicked. Checks if both passwords match and if they do, it calls initLoadLayout()
-"#decrypt-btn".click() - Triggers when decrypt button is clicked. Updates variable 'password' to the  password entered by the user, then calls downloadSite(loadSite)
-"#save-btn".click() - Triggers when Save button is clicked. Calls saveSite()
-"#reload-btn".click() - Triggers when Reload button is clicked. Calls downloadSite(reloadSite)
-"#change-password-btn".click() - Triggers when change password button is clicked. Shows the change password modal. 
-"#change-password-confirm-btn".click() - Sets variable 'password' to the new password entered by the user in the modal. Checks if the re-entered password matches, and then calls saveSite(). Then hides the modal.
-"#delete-btn".click() - Alerts the user if they really want to delete the site, and then calls deleteSite() if they confirm.
-
-
-FUNCTIONS : 
-
-initLoadLayout()
-{
-    sends ajax to /load_layout
-    updates the body of the webpage with the response received
-}
-
-loadLayout(text)
-{
-    sends ajax request to /load_layout
-    updates the body of the webpage with the response receieved
-    populateTabs(text,seperate)
-}
-
-saveSite()
-{
-    collects all the text from all the tabs by calling collectText()
-    calculate initHash or newHash (whichever is required)
-    encrypt the collected text
-    send ajax post request to /save_site with encryptedtext, initHash and newHash
-}
-
-
-*/
-
-
 var password=""
 var site_url = window.location.pathname;
 var initHash = "";
@@ -54,9 +5,8 @@ var newHash = "";
 site_url = site_url.substr(1,site_url.length-2)
 var seperator = "acdcc9e377db73f8b3ae141353015db7c8141a659c465cb3f42ed93e3727e8d5ff4743c887a6816821789df7914749a1ff722455b26057b6058011f3ba8886b5";
 var unsaved = false;
-var salt = "8141a659c465cb3f42ed93e3727e8d5ff4743c887a6816821789df"; //stay safe from rainbow tables
+var salt = "8141a659c465cb3f42ed93e3727e8d5ff4743c887a6816821789df"; 
 var initialText = "";
-// var initialPassword = password;
 
 window.onbeforeunload = function(){
   if(unsaved==true)
@@ -94,12 +44,11 @@ $(document).on('click', '.save-btn', function() {
 $(document).on('click', '.reload-btn', function() {
   //loadLayout(reloadSite);
   $.LoadingOverlay("show");
-  downloadSite(reloadSite); //download cipher and decrypt it
+  downloadSite(reloadSite); 
   $.LoadingOverlay("hide");
 });
 
 $(document).on('click', '.decrypt-btn', function() {
-  //decrypt
   $.LoadingOverlay("show");
   password = document.getElementById("password-field").value;
   downloadSite(loadSite);
@@ -107,9 +56,8 @@ $(document).on('click', '.decrypt-btn', function() {
 
 });
 
-//change-password-btn
 $(document).on('click', '.change-password-btn', function() {
-  //re encrypt the text with the new password, and then send to server
+  //re encrypt the text with the new password, and then send to serve
   // console.log("change password");
   $("#change-password").modal('show');
 });
@@ -137,7 +85,6 @@ $(document).on('click', '#change-password-confirm-btn', function() {
   }
   else
   {
-    //rencrypt and send to server
     password = password_tmp;
     saveSite(supressWarning=true);
   }
@@ -213,7 +160,6 @@ function saveSite(supressWarning=false)
 
     if(allText=="")
     {
-        //show alert that empty text site will be deleted
         var conf = confirm("No text is stored on this site, this will automatically delete your site from our server. Do you want to continue?");
         if(!conf)
         {
@@ -228,8 +174,6 @@ function saveSite(supressWarning=false)
     
     if(initHash=="")
     {
-        //new site
-        // initHash = CryptoJS.SHA512(allText + CryptoJS.SHA512(password).toString()).toString();
         initHash = CryptoJS.SHA512(salt+password).toString();
         newHash = initHash;
         // console.log("Computed new hash");
@@ -237,7 +181,6 @@ function saveSite(supressWarning=false)
 
     else
     {
-        // newHash = CryptoJS.SHA512(allText + CryptoJS.SHA512(password).toString()).toString();
         newHash = CryptoJS.SHA512(salt+password).toString();
 
     }    
@@ -266,13 +209,11 @@ function saveSite(supressWarning=false)
 						    icon: 'success'
 						});
 
-                        //Update initHash to newHash
 
                         initHash = newHash;
                 	}
                     else if(respData.status=='deleted')
                     {
-                        //Site deleted because empty text is attempted to be saved
                         $.toast({
                             heading: 'Success',
                             text: 'Site deleted!',
@@ -340,7 +281,6 @@ function reloadSite(cipher)
 
 async function loadSite(cipher)
 {
-    //load encypted content and decrypt it
 
     
     var text = decryptContent(cipher,password);
@@ -351,7 +291,6 @@ async function loadSite(cipher)
         }
     else
     {
-        //loadlayout
         // console.log("Decrypted : "+text);
         loadLayout(text);
     }
@@ -397,7 +336,6 @@ function decryptContent(cipher,password)
 	{
 		var text = CryptoJS.AES.decrypt(cipher,password).toString(CryptoJS.enc.Utf8).trim();
         initialText = text;
-        //calculate initHash content value
         // initHash = CryptoJS.SHA512(text + CryptoJS.SHA512(password).toString()).toString();
         initHash = CryptoJS.SHA512(salt+password).toString();
         // console.log("decryptedContent: "+text);

@@ -1,12 +1,9 @@
 var tabtextmaxlen = 20;
-//var firsttab=true;
-//var seperator = CryptoJS.SHA512("~~~~~~~~tabseperate~~~~~~~~").toString();
 var seperator = "acdcc9e377db73f8b3ae141353015db7c8141a659c465cb3f42ed93e3727e8d5ff4743c887a6816821789df7914749a1ff722455b26057b6058011f3ba8886b5";
 var availableTabs = [1];
 function newTab2(switchtab)
 {
     
-    //first create text area.
     var newtextarea= document.createElement("textarea");
     var tabnum;
 
@@ -17,7 +14,6 @@ function newTab2(switchtab)
     
     if(tabnum!=1)
         {
-                //create text area
                 newtextarea.setAttribute("id","tab-"+tabnum);
                 newtextarea.setAttribute("class","border rounded actual-textarea tab-pane");
                 newtextarea.setAttribute("spellcheck","false");
@@ -27,7 +23,6 @@ function newTab2(switchtab)
                 document.getElementsByClassName("tab-content")[0].appendChild(newtextarea);
 
 
-                //create tab
                 var newtab = document.createElement("button");
                 newtab.setAttribute("class","tablinks");
                 newtab.setAttribute("id","tab-btn-"+tabnum);
@@ -43,11 +38,9 @@ function newTab2(switchtab)
     
     if(switchtab)
         {
-            //switch to newly created tab
             switchTab("tab-btn-"+tabnum);
         }
 
-        //firsttab = false;
     
     
     
@@ -75,43 +68,7 @@ function switchTab(tabid)
     if(!textarea.className.includes(" active"))
         document.getElementById("tab-"+tabid).className+=" active";
 
-    /**
     
-    var tabcount = document.getElementsByClassName("tab")[0].getElementsByTagName("button").length;
-    var i=1;
-
-    //deactivate all other tabs and textareas first and activate only the required tab and textarea
-
-
-    availableTabs.sort();
-
-    for (i =0; i < availableTabs.length; i++) {
-        
-        var curr_tab = availableTabs[i];
-        if(curr_tab==tabid)
-            {
-
-                var tab = document.getElementById("tab-btn-"+curr_tab);
-                var textarea = document.getElementById("tab-"+curr_tab);
-                if(!tab.className.includes(" active"))
-                    tab.className+=" active"; //tab
-                if(!textarea.className.includes(" active"))
-                    textarea.className+=" active"; //textarea
-                
-            }
-        else
-            {
-                var tab = document.getElementById("tab-btn-"+curr_tab);
-                var textarea = document.getElementById("tab-"+curr_tab);
-                tab.className = tab.className.replace(" active",""); //tab
-                textarea.className = textarea.className.replace(" active",""); //textarea
-            }
-        
-    }
-
-    
-    console.log("tab switched");
-    */
 }
 
 
@@ -174,7 +131,6 @@ function populateTabs(text,seperator)
     
     var i=1
 
-    //remove empty tabs
     tabs = tabs.filter(item => item.trim() !== '')
     //console.log("Tabs array : "+tabs);
     // console.log("length of tabs : "+tabs.length);
@@ -182,13 +138,10 @@ function populateTabs(text,seperator)
     for(i=0;i<tabs.length;i++)
         {
             
-            //add each textarea and its corresponding button(tab).
             newTab2(false);
             
-            //Add text to the tab
             document.getElementsByClassName("border rounded actual-textarea tab-pane")[i].value = tabs[i].trim();
 
-            //also update tab text
             updateText("tab-"+(i+1));
             
         }
@@ -205,7 +158,6 @@ function closeTab()
         return
     
 
-    //get active tab btn and text area
     var tabid = document.getElementsByClassName("border rounded actual-textarea tab-pane active")[0].id;
     tabid = parseInt(tabid.substr(tabid.lastIndexOf("-")+1));
 
@@ -213,12 +165,10 @@ function closeTab()
 
     if(tabid!=1)
     {
-        //remove tab and corresponding text area
         document.getElementById("tab-"+tabid).remove();
         document.getElementById("tab-btn-"+tabid).remove();
         // console.log("Deleted tab with id "+tabid);
 
-        //put previous text area and tab-btn as active
         // console.log("Tab id index : "+availableTabs.indexOf(tabid));
         var prev_tab = availableTabs[availableTabs.indexOf(tabid)-1];
         // console.log("Making tab with id "+prev_tab+" active");
@@ -228,7 +178,6 @@ function closeTab()
         textarea.className+=" active"; //textarea
 
         // console.log("Removing tab "+tabid);
-        //remove the tab from array
         availableTabs.splice(availableTabs.indexOf(parseInt(tabid)),1);
 
         // console.log("Removed tab : "+availableTabs);

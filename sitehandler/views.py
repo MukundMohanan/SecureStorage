@@ -12,14 +12,11 @@ def open_homepage(request):
 
 
 def open_site(request,site_url):
-	#Check if the site already exists
 	site = Sites.objects.filter(site_url=site_url)
 
 	if(len(site)==0):
-		#the site doesn't exist
 		return render(request,'createpage.html')
 	else:
-		#the site already exists
 		return render(request,'enterpassword.html')
 
 
@@ -37,7 +34,6 @@ def save_site(request):
 	siteExists = check_site(site_url)
 
 	if(siteExists==False):
-		#new site
 		if(cipher!=""):
 			site = Sites(site_url = site_url, cipher = cipher, hashcontent=initHash)
 			site.save()
@@ -48,10 +44,8 @@ def save_site(request):
 
 
 	else:
-		#Site already exists
 		hashContent = siteExists[0].hashcontent
 		if(initHash==hashContent):
-			#update the cipher and the hash content
 			if(cipher!=""):
 				siteExists[0].cipher = cipher
 				siteExists[0].hashcontent = newHash

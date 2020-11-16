@@ -12,7 +12,7 @@
         <div class="container-fluid"><a class="navbar-brand secure-text-logo" href="#"><i class="fa fa-lock"></i>&nbsp; Secure Storage</a><div class="d-none d-md-block d-lg-none d-none d-lg-block d-xl-none d-none d-xl-block">
 <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 </div>
-            <div class="collapse navbar-collapse text-center flex-row-reverse flex-shrink-0 flex-wrap textarea-nav" id="navcol-1"><a href="{% url 'report_page' %}"><i data-toggle="tooltip" class="fa fa-bug fa-lg" style="color: rgb(225,5,5);" title="Report issue"></i></a>
+            <div class="collapse navbar-collapse text-center flex-row-reverse flex-shrink-0 flex-wrap textarea-nav" id="navcol-1">
                 <ul class="nav navbar-nav float-right flex-row flex-grow-0 justify-content-around">
                     <li class="nav-item" role="presentation"><button class="btn btn-success option-btns save-btn" id="save-btn" type="button">Save</button></li>
                     <li class="nav-item" role="presentation"><button class="btn btn-success option-btns reload-btn" id="reload-btn" type="button" style="background-color: rgb(242,105,46);">Reload</button></li>
@@ -35,9 +35,7 @@
     <a class="fbtn" href="#" id="delete" data-toggle = "tooltip" title = "Delete">
         <i class="fas fa-trash delete-btn"></i>
     </a>
-    <a class="fbtn" href="{% url 'report_page' %}" id="report" data-toggle = "tooltip" title = "Report">
-        <i class="fas fa-bug"></i>
-    </a>
+    
 </div>
 </div>
 </div>
